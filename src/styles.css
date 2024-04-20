@@ -1,0 +1,126 @@
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: #F4F4F4;
+}
+
+#container {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    background: url(https://w0.peakpx.com/wallpaper/550/527/HD-wallpaper-whatsapp-paper-black-background-thumbnail.jpg);
+    background-position: center;
+}
+.overflow-container {
+    height: 90vh;
+    width: 100%;
+    overflow: auto;
+}
+
+#message-box {
+    min-height: 90vh;
+    width: 100%; 
+    color: #fff;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 20px;
+    overflow: hidden;
+}
+
+form {
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    background-color: #1F1F1F;
+}
+
+#message-input {
+    height: 30px;
+    width: 70vw;
+    border-radius: 10px;
+    background-color: lightgrey;
+    color: #000;
+    font-size: 0.9rem;
+    font-weight: 500;
+    outline: none;
+    padding-left: 10px;
+}
+
+#send-message{
+    background: transparent;
+    color: lightgrey;
+    outline: none;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    box-sizing: content-box;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+}
+
+.chat-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 95vw;
+    padding: 20px;
+}
+
+.current-user-chat-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: fit-content;
+    width: 95vw;
+    padding: 20px;
+}
+
+.broadcast-chat-container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 95vw;
+    padding: 20px;
+}
+
+.notify-message, .message {
+    color: grey;
+    font-style: italic;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.new-message{
+    color: black;
+    background: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: fit-content;
+    max-width: 40vw;
+}
+
+/* .new-message::before {
+    content: '';
+    height: 10px;
+    position: absolute;
+    left: 285px;
+    width: 15px;
+    background-color: red;
+} */
+
+.user-profile {
+    border-radius: 50%;
+    height: 40px;
+    margin: 10px;
+}

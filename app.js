@@ -5,7 +5,6 @@ import cors from 'cors'
 
 import connectToMongoose from './config/mongoose.config.js';
 import { chatModel } from './schema/chat.schema.js';
-import { timeStamp } from 'console';
 
 const app = express();
 const http = createServer(app)
@@ -49,8 +48,8 @@ io.on('connection', (socket) => {
     // })
 
     // this event will occur when user will join the room
-    socket.on('joinRoom', username => {
-        socket.broadcast.emit('systemMessage', {username, users})
+    socket.on('joinRoom', (username) => {
+        socket.broadcast.emit('systemMessage', { username: username, users })
     })
 
 
@@ -67,17 +66,28 @@ io.on('connection', (socket) => {
         });
     })
 
-    // You can emit and listen for custom events
-    socket.on('message', (data) => {
+    socket.on('message', async (data) => {
         try {
+
+
             let obj = {
                 message: data.message,
                 username: data.username,
+                profileUrl: data.profileUrl,
                 timeStamp: new Date()
             }
 
-            const newMessage = new chatModel(obj)
-            newMessage.save();
+            const user = await chatModel.findOne({ username: obj.username });
+
+            if (!user) {
+                const newMessage = new chatModel(obj)
+                await newMessage.save();
+            } else {
+                obj.profileUrl = user.profileUrl;
+                const newMessage = new chatModel(obj);
+                await newMessage.save();
+            }
+
             socket.broadcast.emit('broadcast', obj);
         } catch (err) {
             console.log(err);
@@ -86,7 +96,7 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         users--;
-        socket.broadcast.emit('userDisconnect')
+        socket.broadcast.emit('userDisconnect', users)
         console.log('User disconnected');
     });
 });
