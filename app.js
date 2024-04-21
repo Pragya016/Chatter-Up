@@ -1,3 +1,7 @@
+// I have added some extra functionalities such as when user will send or recieve a message,
+// it will automatically scroll to bottom etc.
+
+
 import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
