@@ -41,7 +41,9 @@ while (!hasEnteredName) {
     }
 }
 // emit this event when someone joins the chat
-socket.emit('joinRoom', { username });
+getUserProfile().then(url => {
+    socket.emit('joinRoom', { username, url });
+})
 
 // emit this event to display welcome message
 socket.emit('register', username);
@@ -87,16 +89,14 @@ socket.on('welcome', msg => {
 
 // notify others that someone has joined the room
 socket.on('systemMessage', (data) => {
-    getUserProfile().then(url => {
         const newChat = `<div class="chat-container">
-        <img src=${url} alt="user-profile" class="user-profile">
-        <div class="notify-message">${data.username.username} joined the chat.</div>
+        <img src=${data.profileUrl} alt="user-profile" class="user-profile">
+        <div class="notify-message">${data.username} joined the chat.</div>
         </div><div class="message>${data.users}</div>`
 
         messageBox?.insertAdjacentHTML('beforeend', newChat)
         scrollToBottom()
     })
-})
 
 // when user will send the message
 formContainer?.addEventListener('submit', (e) => {
